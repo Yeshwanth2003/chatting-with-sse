@@ -13,12 +13,12 @@ function PopUpBody() {
   let popupRef = useRef();
 
   function onSubmit() {
-    let name = nameInputRef.current.value;
+    let name = nameInputRef.current.value.trim();
     if (name.length === 0 || name === "") {
-      popupRef.current.classList.add("chat-namepopup-bounce")
-      setTimeout(()=>{
-        popupRef.current.classList.remove("chat-namepopup-bounce")
-      },100)
+      popupRef.current.classList.add("chat-namepopup-bounce");
+      setTimeout(() => {
+        popupRef.current.classList.remove("chat-namepopup-bounce");
+      }, 100);
       return;
     }
     setUserName(name);
@@ -26,9 +26,7 @@ function PopUpBody() {
   }
 
   // Listen to Enter event
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
 
   return (
     <>

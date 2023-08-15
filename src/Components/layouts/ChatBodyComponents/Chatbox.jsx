@@ -11,6 +11,7 @@ import ProfileIMG from "../../../asserts/profile.png";
 import "./styles/chatbox.css";
 import { MessageType } from "../../../utilities/utilityFile";
 import { PostMessage } from "../../../apiCall/Subscribe";
+import { mkBase64IMG } from "../../../utilities/mkBase64IMG";
 
 export default function CB() {
   let { shallChat } = useContext(ContextTag);
@@ -37,7 +38,7 @@ function ChatPage() {
     setShowSend(false);
   }
   // on send
-  function mkMessageFrame(type) {
+  async function mkMessageFrame(type) {
     setShowSend(false);
     const messageFrame = {};
     messageFrame.id = userId;
@@ -49,15 +50,27 @@ function ChatPage() {
       messageFrame.type = MessageType.text;
       messageFrame.message = messageInput.current.value;
       messageInput.current.value = "";
+      PostMessage(messageFrame);
     }
     // if type is image
     else {
       messageFrame.type = MessageType.image;
-      messageFrame.message = "";
+      // messageFrame.message = "";
+      try {
+        mkBase64IMG((base64) => {
+          if (!base64) {
+            return;
+          }
+          messageFrame.message = base64;
+          PostMessage(messageFrame);
+        });
+      } catch {
+        // if some error occured
+        return;
+      }
     }
     // might need
     // messageBoxRef.current.addImmediately(messageFrame.message);
-    PostMessage(messageFrame);
   }
 
   return (
@@ -119,7 +132,10 @@ function ChatPage() {
                   </svg>
                 </button>
               ) : (
-                <button className="sc-typebox-button">
+                <button
+                  className="sc-typebox-button"
+                  onClick={mkMessageFrame.bind(this, MessageType.image)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -169,7 +185,6 @@ const MessagesBox = forwardRef((props, ref) => {
     <>
       <div id="messageBox" className="sc-messagebox-wrapper">
         {thisInbox.map((elem) => {
-          console.log(elem);
           if (elem.type === MessageType.text) {
             if (elem.from === peerDetails.name) {
               return (
@@ -185,13 +200,41 @@ const MessagesBox = forwardRef((props, ref) => {
               );
             }
           } else {
-            return <></>;
+            //  creating obj url for img is pending code in utils
+            if (elem.from === peerDetails.name) {
+              return (
+                <>
+                  <FromI link={elem.message} />
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <ToI link={elem.message} />
+                </>
+              );
+            }
           }
         })}
       </div>
     </>
   );
 });
+
+function FromI({ link }) {
+  return (
+    <>
+      <img src={link} alt="" className="sc-message-from sc-img-msg" />
+    </>
+  );
+}
+function ToI({ link }) {
+  return (
+    <>
+      <img src={link} className="sc-message-to sc-img-msg" alt="" />
+    </>
+  );
+}
 
 function From({ message }) {
   return (

@@ -2,7 +2,7 @@ let userId;
 let url = "http://192.168.244.168";
 
 export function SSE_Subscribe(username) {
-  const ES = new EventSource(`${url}/newEventConnection?name=${username}`);
+  const ES = new EventSource(`/newEventConnection?name=${username}`);
   return ES;
 }
 export function LISTEN_SSE(ES, setAvailableUsers, setInbox, setUserId) {
@@ -54,7 +54,7 @@ export function LISTEN_SSE(ES, setAvailableUsers, setInbox, setUserId) {
 }
 
 export function PostMessage(messageFrame) {
-  fetch(`${url}/message`, {
+  fetch(`/message`, {
     method: "POST",
     body: JSON.stringify(messageFrame),
   }).then(
