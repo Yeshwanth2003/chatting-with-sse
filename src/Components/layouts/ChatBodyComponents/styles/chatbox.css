@@ -1,0 +1,145 @@
+.sc-wrapper {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  /* background-color: rgb(255, 0, 0); */
+}
+.sc-person-desc-div {
+  height: 80px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-gray);
+  display: flex;
+  align-items: center;
+  background-color: var(--app-green-shade);
+}
+.sc-peer-name {
+  font-family: sans-serif;
+  color: var(--app-green-theme);
+  text-transform: capitalize;
+}
+.sc-profile-div {
+  width: 60px;
+  max-height: 100%;
+  margin: 10px 20px;
+}
+.sc-profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-color: var(--app-green-theme);
+}
+.sc-leave-peer {
+  height: 60px;
+  width: 50px;
+  margin: auto 10px auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sc-message-container {
+  width: 100%;
+  height: calc(100vh - 130px);
+  /* background-color: cadetblue; */
+}
+.sc-body-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+}
+.sc-typebox-div {
+  height: 50px;
+  background-color: var(--app-green-shade);
+  padding: 0 20px;
+  display: flex;
+  gap: 5px;
+}
+.sc-typebox-input-div {
+  width: 600px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sc-typebox-input {
+  width: 100%;
+  height: 90%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+.sc-typebox-button-div {
+  height: 100%;
+  width: 60px;
+}
+.sc-typebox-button {
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  outline-color: transparent;
+  cursor: pointer;
+}
+.sc-dispatcher-button {
+  fill: var(--app-green-theme-dark);
+}
+.sc-dispatcher-button:active {
+  transform: scale(0.9);
+}
+.sc-messagebox-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: scroll;
+  scrollbar-width: 0;
+}
+.sc-messagebox-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.sc-message-from,
+.sc-message-to{
+max-width: 47%;
+margin: 10px 5px;
+text-align: justify;
+padding: 10px;
+font-family: sans-serif;
+border-radius: 10px;
+}
+.sc-message-to{
+  align-self: flex-end;
+  background-color: var(--message-to-bg);
+  color: white;
+}
+.sc-message-from{
+  background-color: var(--app-green-theme);
+  color: rgb(255, 252, 252);
+  align-self: flex-start;
+}
+@media (min-device-width: 1100px), (width>1100px) {
+  .cb-wrapper {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    /* background-color: aqua; */
+  }
+}
+@media (max-device-width: 1100px), (width<1100px) {
+  .cb-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .sc-typebox-input-div {
+    width: 100%;
+  }
+  .sc-person-desc-div {
+    height: 70px;
+  }
+  .sc-message-container {
+    height: calc(85vh - 120px);
+  }
+}
